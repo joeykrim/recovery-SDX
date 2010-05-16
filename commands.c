@@ -103,7 +103,7 @@ cmd_format(const char *name, void *cookie, int argc, const char *argv[])
         return 1;
     }
     const char *root = argv[0];
-    ui_print("Formatting %s...\n", root);
+    printf("Formatting %s...\n", root);
 
     int ret = format_root_device(root);
     if (ret != 0) {
@@ -135,7 +135,7 @@ cmd_delete(const char *name, void *cookie, int argc, const char *argv[])
     }
 
     recurse = (strcmp(name, "delete_recursive") == 0);
-    ui_print("Deleting files...\n");
+    printf("Deleting files...\n");
 
     int i;
     for (i = 0; i < argc; i++) {
@@ -227,8 +227,8 @@ cmd_copy_dir(const char *name, void *cookie, int argc, const char *argv[])
     }
 
     // Use 40% of the progress bar (80% post-verification) by default
-    ui_print("Copying files...\n");
-    if (!gDidShowProgress) ui_show_progress(DEFAULT_FILES_PROGRESS_FRACTION, 0);
+    printf("Copying files...\n");
+    // if (!gDidShowProgress) ui_show_progress(DEFAULT_FILES_PROGRESS_FRACTION, 0);
 
     /* Mount the destination volume if it isn't already.
      */
@@ -451,7 +451,7 @@ cmd_show_progress(const char *name, void *cookie, int argc, const char *argv[])
 
     // Half of the progress bar is taken by verification,
     // so everything that happens during installation is scaled.
-    ui_show_progress(fraction * (1 - VERIFICATION_PROGRESS_FRACTION), duration);
+    // ui_show_progress(fraction * (1 - VERIFICATION_PROGRESS_FRACTION), duration);
     gDidShowProgress = 1;
     return 0;
 }
@@ -507,7 +507,7 @@ static bool firmware_fn(const unsigned char *data, int data_len, void *cookie)
 
     memcpy(context->data + context->done_bytes, data, data_len);
     context->done_bytes += data_len;
-    ui_set_progress(context->done_bytes * 1.0 / context->total_bytes);
+    // ui_set_progress(context->done_bytes * 1.0 / context->total_bytes);
     return true;
 }
 
@@ -543,7 +543,7 @@ cmd_write_firmware_image(const char *name, void *cookie,
         return 1;
     }
 
-    ui_print("Extracting %s image...\n", type);
+    printf("Extracting %s image...\n", type);
     char path[PATH_MAX];
     const ZipArchive *package;
     if (!translate_package_root_path(argv[0], path, sizeof(path), &package)) {
@@ -610,8 +610,8 @@ cmd_write_raw_image(const char *name, void *cookie,
     // Use 10% of the progress bar (20% post-verification) by default
     const char *src_root_path = argv[0];
     const char *dst_root_path = argv[1];
-    ui_print("Writing %s...\n", dst_root_path);
-    if (!gDidShowProgress) ui_show_progress(DEFAULT_IMAGE_PROGRESS_FRACTION, 0);
+    printf("Writing %s...\n", dst_root_path);
+    // if (!gDidShowProgress) ui_show_progress(DEFAULT_IMAGE_PROGRESS_FRACTION, 0);
 
     /* Find the source image, which is probably in a package.
      */

@@ -288,9 +288,9 @@ try_update_binary(const char *path, ZipArchive *zip) {
         } else if (strcmp(command, "ui_print") == 0) {
             char* str = strtok(NULL, "\n");
             if (str) {
-                ui_print(str);
+                printf(str);
             } else {
-                ui_print("\n");
+                printf("\n");
             }
         } else {
             LOGE("unknown command [%s]\n", command);
@@ -315,13 +315,13 @@ try_update_binary(const char *path, ZipArchive *zip) {
 static int
 handle_update_package(const char *path, ZipArchive *zip)
 {
-    // Give verification half the progress bar...
+/*    // Give verification half the progress bar...
     ui_print("Verifying update package...\n");
     ui_show_progress(
             VERIFICATION_PROGRESS_FRACTION,
             VERIFICATION_PROGRESS_TIME);
 
-/*
+*//*
     if (!verify_jar_signature(zip, keys, numKeys)) {
         LOGE("Verification failed\n");
         return INSTALL_CORRUPT;
@@ -433,9 +433,9 @@ exit:
 }
 
 int
-install_package(const char *root_path)
+install_package(const char *path)
 {
-    ui_set_background(BACKGROUND_ICON_INSTALLING);
+/*    ui_set_background(BACKGROUND_ICON_INSTALLING);
     ui_print("Finding update package...\n");
     ui_show_indeterminate_progress();
     LOGI("Update location: %s\n", root_path);
@@ -450,8 +450,8 @@ install_package(const char *root_path)
         LOGE("Bad path %s\n", root_path);
         return INSTALL_CORRUPT;
     }
-
-    ui_print("Opening update package...\n");
+*/
+    printf("Opening update package...\n");
     LOGI("Update file path: %s\n", path);
 
 /*
