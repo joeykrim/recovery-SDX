@@ -367,15 +367,15 @@ format_root_device(const char *root)
         int status;
 
         while (waitpid(pid, &status, WNOHANG) == 0) {
-            ui_print(".");
+            printf(".");
             sleep(1);
         }
-        ui_print("\n");
+        printf("\n");
 
         if (!WIFEXITED(status) || (WEXITSTATUS(status) != 0)) {
             LOGW("format_root_device: can't erase \"%s\"\n", root);
 	    return -1;
-            ui_print("Error running samdroid backup. Backup not performed.\n\n");
+            printf("Error running samdroid backup. Backup not performed.\n\n");
         }
 	return 0;
     }

@@ -34,7 +34,6 @@
 #include "common.h"
 #include "cutils/misc.h"
 #include "cutils/properties.h"
-#include "firmware.h"
 #include "minzip/DirUtil.h"
 #include "minzip/Zip.h"
 #include "roots.h"
@@ -186,7 +185,7 @@ static void extract_cb(const char *fn, void *cookie)
 {
     // minzip writes the filename to the log, so we don't need to
     ExtractContext *ctx = (ExtractContext*) cookie;
-    ui_set_progress((float) ++ctx->num_done / ctx->num_total);
+    // ui_set_progress((float) ++ctx->num_done / ctx->num_total);
 }
 
 /* copy_dir <src-dir> <dst-dir> [<timestamp>]
@@ -573,13 +572,13 @@ cmd_write_firmware_image(const char *name, void *cookie,
         free(context.data);
         return 1;
     }
-
+/*
     if (remember_firmware_update(type, context.data, context.total_bytes)) {
         LOGE("Can't store %s image\n", type);
         free(context.data);
         return 1;
     }
-
+*/
     return 0;
 }
 

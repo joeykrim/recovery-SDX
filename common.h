@@ -18,6 +18,7 @@
 #define RECOVERY_COMMON_H
 
 #include <stdio.h>
+/* no ui functions!
 
 // Initialize the graphics system.
 void ui_init();
@@ -78,9 +79,10 @@ void ui_show_indeterminate_progress();
 
 // Hide and reset the progress bar.
 void ui_reset_progress();
+*/
 
-#define LOGE(...) printf("__VA_ARGS__)
-#define LOGW(...) printf( __VA_ARGS__)
+#define LOGE(...) printf(__VA_ARGS__)
+#define LOGW(...) printf(__VA_ARGS__)
 #define LOGI(...) printf(__VA_ARGS__)
 
 #if 0

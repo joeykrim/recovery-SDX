@@ -32,7 +32,7 @@ LOCAL_SRC_FILES := \
 		main.c
 
 LOCAL_CFLAGS := $(amend_cflags) -g -O0
-LOCAL_MODULE := amend
+LOCAL_MODULE := amend_two
 LOCAL_YACCFLAGS := -v
 
 include $(BUILD_HOST_EXECUTABLE)
@@ -46,6 +46,6 @@ LOCAL_SRC_FILES := $(amend_src_files)
 LOCAL_SRC_FILES += $(amend_test_files)
 
 LOCAL_CFLAGS := $(amend_cflags)
-LOCAL_MODULE := libamend
+LOCAL_MODULE := libamend_two
 
 include $(BUILD_STATIC_LIBRARY)

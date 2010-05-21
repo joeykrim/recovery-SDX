@@ -1,15 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "bootloader.h"
 #include "commands.h"
 #include "common.h"
-#include "cutils/properties.h"
-#include "firmware.h"
 #include "install.h"
-#include "minui/minui.h"
-#include "minzip/DirUtil.h"
-#include "roots.h"
 
 int
 main(int argc, char **argv)
@@ -32,7 +26,7 @@ main(int argc, char **argv)
 		return -1;
     	}
 
-	if (install_package(argv[1]) {
+	if (install_package(argv[1])) {
 		printf("Unable to install the package!\n");
 		return -1;
 	}

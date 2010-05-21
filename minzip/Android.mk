@@ -12,7 +12,7 @@ LOCAL_C_INCLUDES += \
 	external/zlib \
 	external/safe-iop/include
 	
-LOCAL_MODULE := libminzip
+LOCAL_MODULE := libminzip_two
 
 LOCAL_CFLAGS += -Wall
 

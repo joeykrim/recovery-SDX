@@ -25,15 +25,10 @@
 #include "amend/amend.h"
 #include "common.h"
 #include "install.h"
-#include "mincrypt/rsa.h"
-#include "minui/minui.h"
 #include "minzip/SysUtil.h"
 #include "minzip/Zip.h"
 #include "mtdutils/mounts.h"
 #include "mtdutils/mtdutils.h"
-#include "roots.h"
-#include "verifier.h"
-#include "firmware.h"
 
 #define ASSUMED_UPDATE_SCRIPT_NAME  "META-INF/com/google/android/update-script"
 #define ASSUMED_UPDATE_BINARY_NAME  "META-INF/com/google/android/update-binary"
@@ -163,12 +158,13 @@ handle_firmware_update(char* type, char* filename, ZipArchive* zip) {
         }
         fclose(f);
     }
-
+/*
     if (remember_firmware_update(type, data, data_size)) {
         LOGE("Can't store %s image\n", type);
         free(data);
         return INSTALL_ERROR;
     }
+*/
     free(filename);
 
     return INSTALL_SUCCESS;
@@ -267,12 +263,11 @@ try_update_binary(const char *path, ZipArchive *zip) {
             float fraction = strtof(fraction_s, NULL);
             int seconds = strtol(seconds_s, NULL, 10);
 
-            ui_show_progress(fraction * (1-VERIFICATION_PROGRESS_FRACTION),
-                             seconds);
+            // ui_show_progress(fraction * (1-VERIFICATION_PROGRESS_FRACTION), seconds);
         } else if (strcmp(command, "set_progress") == 0) {
             char* fraction_s = strtok(NULL, " \n");
             float fraction = strtof(fraction_s, NULL);
-            ui_set_progress(fraction);
+            // ui_set_progress(fraction);
         } else if (strcmp(command, "firmware") == 0) {
             char* type = strtok(NULL, " \n");
             char* filename = strtok(NULL, " \n");
@@ -329,7 +324,7 @@ handle_update_package(const char *path, ZipArchive *zip)
 */
 
     // Update should take the rest of the progress bar.
-    ui_print("Installing update...\n");
+    printf("Installing update...\n");
 
     int result = try_update_binary(path, zip);
     if (result == INSTALL_SUCCESS || result == INSTALL_ERROR) {
@@ -372,6 +367,7 @@ handle_update_package(const char *path, ZipArchive *zip)
 // commas.  The last key must not be followed by a comma.
 //
 // Returns NULL if the file failed to parse, or if it contain zero keys.
+/*
 static RSAPublicKey*
 load_keys(const char* filename, int* numKeys) {
     RSAPublicKey* out = NULL;
@@ -430,7 +426,7 @@ exit:
     free(out);
     *numKeys = 0;
     return NULL;
-}
+}*/
 
 int
 install_package(const char *path)
